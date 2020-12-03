@@ -16,6 +16,9 @@ set(CPPKAFKA_VERSION "${CPPKAFKA_VERSION_MAJOR}.${CPPKAFKA_VERSION_MINOR}.${CPPK
 set(RDKAFKA_MIN_VERSION "0.9.4")
 set(RDKAFKA_MIN_VERSION_HEX 0x00090400)
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 if (NOT CMAKE_CXX_FLAGS)
     # Set default compile flags for the project
     if(MSVC)
@@ -28,7 +31,7 @@ if (NOT CMAKE_CXX_FLAGS)
         add_definitions("-DNOGDI=1")
         add_definitions("-DNOMINMAX=1")
     else()
-        set(CMAKE_CXX_FLAGS "-std=c++11 -Wall")
+        set(CMAKE_CXX_FLAGS "-Wall")
     endif()
 endif()
 
@@ -106,7 +109,6 @@ endif()
 find_package(Boost REQUIRED ${FIND_PACKAGE_QUIET})
 
 if (Boost_FOUND)
-    find_package(Boost COMPONENTS program_options ${FIND_PACKAGE_QUIET})
     set(Boost_USE_STATIC_LIBS ${CPPKAFKA_BOOST_STATIC_LIBS})
     set(Boost_USE_MULTITHREADED ${CPPKAFKA_BOOST_USE_MULTITHREADED})
     include_directories(${Boost_INCLUDE_DIRS})
